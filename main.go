@@ -6,8 +6,9 @@ import (
 )
 
 func main() {
-	router := gin.New()
-	router.Use(gin.Logger())
+	router := gin.Default()
+
+	// Enable CORS for all origins
 	router.Use(func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
@@ -21,7 +22,9 @@ func main() {
 
 		c.Next()
 	})
+
 	routes.ResRoutes(router)
 	routes.ShortRoutes(router)
+
 	router.Run()
 }
