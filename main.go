@@ -2,14 +2,13 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/mrkhan02/url-shortner-api/routes"
 )
-var Router * gin.Engine
+
 func main() {
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello world!",
-		})
-	})
-	r.Run()
+	router := gin.New()
+	router.Use(gin.Logger())
+	routes.ResRoutes(router)
+	routes.ShortRoutes(router)
+	router.Run()
 }
